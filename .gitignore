@@ -1,0 +1,12 @@
+# OpenSCAD generated/temp
+*.csg
+*.bak
+*.tmp
+*~
+.DS_Store
+Thumbs.db
+
+# Keep curated calibration/output STLs under calibration/stl/
+# Ignore arbitrary generated STLs elsewhere.
+*.stl
+!calibration/stl/*.stl
