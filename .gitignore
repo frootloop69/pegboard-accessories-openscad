@@ -3,10 +3,7 @@
 *.bak
 *.tmp
 *~
+*.stl
+build/
 .DS_Store
 Thumbs.db
-
-# Keep curated calibration/output STLs under calibration/stl/
-# Ignore arbitrary generated STLs elsewhere.
-*.stl
-!calibration/stl/*.stl
