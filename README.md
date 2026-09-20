@@ -56,3 +56,18 @@ Mount calibration is authoritative: dimensions are updated from actual printed f
 ## OpenSCAD
 
 The project is intended to work with the normal OpenSCAD desktop application. Generated calibration parts should always be printed at 100% scale.
+
+## Current accessories
+
+### Eureka workspace driver station
+
+The first production accessory is a modular electronics-workbench driver
+station. It includes:
+
+- three-slot fixed screwdriver rack
+- optional lower guide for the two long drivers
+- full-size ratchet drop-through holder with adjacent bit-caddy pocket
+- Stanley stubby ratchet drop-through holder
+
+Measured tool dimensions and V1 clearances are documented in
+`docs/DRIVER_STATION.md`.
