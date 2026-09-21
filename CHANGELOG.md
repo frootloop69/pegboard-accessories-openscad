@@ -98,3 +98,10 @@
 - Reduced the full-size ratchet U-slot from **30.0 mm to 27.0 mm** after
   physical testing showed the non-circular handle could rotate and slip
   through the 30 mm opening.
+
+- Recalibrated the Eureka workspace mount for **Creality Hyper PLA** in the
+  repository-standard axis-aligned production orientation.
+- **5.2 mm CAL_PEG_D physically validated** and set as the current Eureka
+  production default.
+- Preserved the earlier 5.5 mm result as a historical calibration for the
+  previous filament/process.
