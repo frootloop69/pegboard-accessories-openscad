@@ -426,7 +426,7 @@ module driver_station_fit_coupon(
     pad=8
 ) {
     plate_w = 110;
-    plate_d = 52;
+    plate_d = 80;
 
     difference() {
         cube([plate_d, plate_w, thickness]);
@@ -440,13 +440,13 @@ module driver_station_fit_coupon(
 
         // V2 fixed-driver drop-through holes.
         // Deliberately straight-sided with no top chamfer.
-        translate([plate_d-18,18,-DS_EPS])
+        translate([60,20,-DS_EPS])
             cylinder(d=LARGE_PH_HOLE_D, h=thickness+2*DS_EPS, $fn=64);
 
-        translate([plate_d-18,47,-DS_EPS])
+        translate([60,52,-DS_EPS])
             cylinder(d=LARGE_FLAT_HOLE_D, h=thickness+2*DS_EPS, $fn=64);
 
-        translate([plate_d-18,68,-DS_EPS])
+        translate([60,82,-DS_EPS])
             cylinder(d=SMALL_FLAT_HOLE_D, h=thickness+2*DS_EPS, $fn=48);
     }
 }
