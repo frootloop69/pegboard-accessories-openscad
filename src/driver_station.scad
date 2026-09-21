@@ -398,6 +398,48 @@ module long_driver_lower_guide(
 }
 
 
+// Side wall with a convex rounded front/top corner.
+// The fillet is in the X/Z profile and runs across the wall thickness (Y),
+// rounding the exposed free-end edge without changing the pocket width.
+module ds_caddy_side_wall(
+    depth,
+    wall,
+    height,
+    front_top_fillet_r=4,
+    fn=32
+) {
+    r = min(front_top_fillet_r, depth, height);
+
+    if (r <= 0) {
+        cube([depth, wall, height]);
+    } else {
+        union() {
+            // Main body below the fillet.
+            cube([depth, wall, height-r]);
+
+            // Full-height rear section.
+            translate([r,0,height-r])
+                cube([depth-r, wall, r]);
+
+            // Quarter-cylinder forming the rounded front/top corner.
+            intersection() {
+                translate([r, wall/2, height-r])
+                    rotate([90,0,0])
+                        cylinder(
+                            r=r,
+                            h=wall,
+                            center=true,
+                            $fn=fn
+                        );
+
+                translate([0,0,height-r])
+                    cube([r, wall, r]);
+            }
+        }
+    }
+}
+
+
 // Shallow pocket for the ratchet bit caddy. The caddy is stored vertically:
 // 69.9 mm high x 48.9 mm wide x 15.98 mm body depth.
 // Bits may protrude ~13 mm farther forward; the pocket captures only the
@@ -410,6 +452,7 @@ module bit_caddy_pocket(
     capture_h=26,
     wall=3,
     front_lip_h=1.5,
+    side_front_top_fillet_r=4,
     base_z=DS_SHELF_TOP_Z,
     back_overlap=DS_EPS
 ) {
@@ -432,14 +475,20 @@ module bit_caddy_pocket(
 
     // No separate rear wall: the common pegboard backplate closes the pocket.
 
-    // side walls
+    // Side walls. Their exposed front/top edges are rounded to remove the
+    // two sharp corners at the mouth of the pocket.
     for (sy = [-1,1])
         translate([
             front_x-wall,
             center_y + sy*(inner_w/2 + wall/2) - wall/2,
             base_z-wall
         ])
-            cube([shell_d, wall, capture_h+wall]);
+            ds_caddy_side_wall(
+                depth=shell_d,
+                wall=wall,
+                height=capture_h+wall,
+                front_top_fillet_r=side_front_top_fillet_r
+            );
 
     // low front lip
     translate([
@@ -472,6 +521,7 @@ module full_ratchet_with_bits(
     caddy_inner_w=50.5,
     caddy_wall=3,
     caddy_lip_h=1.5,
+    caddy_side_fillet_r=4,
     front_cap_r=undef,
     root_fillet_r=DS_DEFAULT_ROOT_FILLET_R,
     contact_chamfer=DS_DEFAULT_CONTACT_CHAMFER
@@ -530,6 +580,7 @@ module full_ratchet_with_bits(
             inner_w=caddy_inner_w,
             wall=caddy_wall,
             front_lip_h=caddy_lip_h,
+            side_front_top_fillet_r=caddy_side_fillet_r,
             base_z=DS_SHELF_TOP_Z - shelf_thickness + caddy_wall
         );
 
