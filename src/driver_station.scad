@@ -401,14 +401,15 @@ module long_driver_lower_guide(
 // Shallow pocket for the ratchet bit caddy. The caddy is stored vertically:
 // 69.9 mm high x 48.9 mm wide x 15.98 mm body depth.
 // Bits may protrude ~13 mm farther forward; the pocket captures only the
-// lower body and leaves the bits unobstructed.
+// lower body and leaves the bits unobstructed. The front lip must remain
+// <= 1.5 mm above the inside floor so it does not interfere with the bits.
 module bit_caddy_pocket(
     center_y=26,
     inner_w=50.5,
     inner_d=17.5,
     capture_h=26,
     wall=3,
-    front_lip_h=10,
+    front_lip_h=1.5,
     base_z=DS_SHELF_TOP_Z,
     back_overlap=DS_EPS
 ) {
@@ -470,6 +471,7 @@ module full_ratchet_with_bits(
     caddy_y=undef,
     caddy_inner_w=50.5,
     caddy_wall=3,
+    caddy_lip_h=1.5,
     front_cap_r=undef,
     root_fillet_r=DS_DEFAULT_ROOT_FILLET_R,
     contact_chamfer=DS_DEFAULT_CONTACT_CHAMFER
@@ -527,6 +529,7 @@ module full_ratchet_with_bits(
             center_y=caddy_center_y,
             inner_w=caddy_inner_w,
             wall=caddy_wall,
+            front_lip_h=caddy_lip_h,
             base_z=DS_SHELF_TOP_Z - shelf_thickness + caddy_wall
         );
 
