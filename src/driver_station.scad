@@ -470,6 +470,7 @@ module full_ratchet_with_bits(
     ratchet_axis_out=25,
     ratchet_y=-31,
     caddy_y=27,
+    caddy_wall=3,
     front_cap_r=undef,
     root_fillet_r=DS_DEFAULT_ROOT_FILLET_R,
     contact_chamfer=DS_DEFAULT_CONTACT_CHAMFER
@@ -514,7 +515,12 @@ module full_ratchet_with_bits(
             }
 
         // Bit caddy keeps only its own required pocket geometry.
-        bit_caddy_pocket(center_y=caddy_y);
+        // Its underside is aligned with the underside of the ratchet U shelf.
+        bit_caddy_pocket(
+            center_y=caddy_y,
+            wall=caddy_wall,
+            base_z=DS_SHELF_TOP_Z - shelf_thickness + caddy_wall
+        );
 
         // Root reinforcement exists only behind the ratchet U, not across the
         // material-free region beside the caddy.
