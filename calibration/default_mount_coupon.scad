@@ -1,28 +1,35 @@
 /*
   Generic pegboard mount calibration coupon.
-  Set CAL_PEG_D before including this file, or render directly at 5.8 mm.
+
+  Open this file directly to render the generic 5.8 mm coupon, or import the
+  mount_calibration_coupon() module from a board-specific tuning file.
 */
 
 use <../src/mount.scad>
 
-CAL_PEG_D = is_undef(CAL_PEG_D) ? 5.8 : CAL_PEG_D;
-CAL_PITCH = is_undef(CAL_PITCH) ? 25.4 : CAL_PITCH;
-CAL_BOARD_GEOM = is_undef(CAL_BOARD_GEOM) ? 5.0 : CAL_BOARD_GEOM;
-CAL_HOOK_OFFSET = is_undef(CAL_HOOK_OFFSET) ? 4.5 : CAL_HOOK_OFFSET;
-CAL_NECK = is_undef(CAL_NECK) ? 0.5 : CAL_NECK;
+module mount_calibration_coupon(
+    peg_d=5.8,
+    pitch=25.4,
+    board_geom=5.0,
+    hook_offset=4.5,
+    neck_length=0.5
+) {
+    // Print in the same axis-aligned orientation as production accessories so
+    // filament/process effects on the peg geometry are representative.
+    translate([
+        0,
+        0,
+        -pegboard_mount_bottom_z(pitch, peg_d)
+    ])
+        pegboard_mount(
+            columns=2,
+            pitch=pitch,
+            peg_d=peg_d,
+            board_geom=board_geom,
+            hook_offset=hook_offset,
+            neck_length=neck_length
+        );
+}
 
-// Print in the same axis-aligned orientation as production accessories so
-// filament/process effects on the peg geometry are representative.
-translate([
-    0,
-    0,
-    -pegboard_mount_bottom_z(CAL_PITCH, CAL_PEG_D)
-])
-    pegboard_mount(
-        columns=2,
-        pitch=CAL_PITCH,
-        peg_d=CAL_PEG_D,
-        board_geom=CAL_BOARD_GEOM,
-        hook_offset=CAL_HOOK_OFFSET,
-        neck_length=CAL_NECK
-    );
+// Direct-open default.
+mount_calibration_coupon();
