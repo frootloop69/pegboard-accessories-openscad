@@ -15,8 +15,10 @@
 
 | Test | Result |
 |---|---|
-| 5.8 mm | Fits easily; diameter can likely increase |
-| 6.1 mm | Pending |
-| 6.2 mm | Pending |
+| 5.8 mm | Fits easily; diameter can increase |
+| 6.2 mm | Still loose |
+| 6.8 mm | Pending |
+| 6.9 mm | Pending |
+| 7.0 mm | Pending |
 
-**Decision:** keep Spampur diameter provisional until 6.1 and 6.2 are tested.
+**Decision:** keep Spampur diameter provisional. The useful fit range is clearly larger than initially expected, so the next bracket is 6.8–7.0 mm.
