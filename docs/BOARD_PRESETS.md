@@ -28,7 +28,9 @@ board_geom         = 5.0 mm
 
 Known results:
 - 5.8 mm fits easily.
-- 6.1 mm coupon generated; test pending.
-- 6.2 mm coupon generated; test pending.
+- 6.2 mm is still loose.
+- 6.8 mm coupon generated; test pending.
+- 6.9 mm coupon generated; test pending.
+- 7.0 mm coupon generated; test pending.
 
 Do not lock the Spampur diameter until the physical tests are complete.
