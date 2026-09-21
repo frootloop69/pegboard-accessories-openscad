@@ -106,3 +106,23 @@ Optional local-clearance test:
 
 All parts should be printed at 100% scale. PETG is preferred for the final
 working parts; PLA is acceptable for fit checks.
+
+
+## U-slot comparison test
+
+A second calibration coupon is available at:
+
+- `calibration/driver_station_u_slot_coupon.scad`
+
+It tests all five current support diameters as open U-shaped slots while
+leaving the production holder geometry unchanged:
+
+- 20.0 mm — large Phillips
+- 21.5 mm — large flat-blade
+- 6.9 mm — small flat-blade
+- 30.0 mm — full-size ratchet
+- 33.0 mm — Stanley stubby
+
+The slots have straight sides and no entry chamfer. The intent is to compare
+one-handed side loading/removal against the closed drop-through holes without
+changing the support diameter.
