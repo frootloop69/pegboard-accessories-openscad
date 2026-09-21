@@ -249,6 +249,9 @@ module fixed_driver_rack(
     ph_y=-31,
     flat_y=4,
     small_y=31,
+    ph_slot_d=ph_slot_d,
+    flat_slot_d=flat_slot_d,
+    small_slot_d=small_slot_d,
     root_fillet_r=DS_DEFAULT_ROOT_FILLET_R,
     contact_chamfer=DS_DEFAULT_CONTACT_CHAMFER,
     small_contact_chamfer=DS_SMALL_TOOL_CONTACT_CHAMFER
@@ -277,14 +280,14 @@ module fixed_driver_rack(
 
             translate([0,ph_y,0]) {
                 ds_u_slot_cut(
-                    slot_d=LARGE_PH_SUPPORT_D,
+                    slot_d=ph_slot_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness,
                     top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
-                    slot_d=LARGE_PH_SUPPORT_D,
+                    slot_d=ph_slot_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     chamfer=contact_chamfer,
@@ -294,14 +297,14 @@ module fixed_driver_rack(
 
             translate([0,flat_y,0]) {
                 ds_u_slot_cut(
-                    slot_d=LARGE_FLAT_SUPPORT_D,
+                    slot_d=flat_slot_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness,
                     top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
-                    slot_d=LARGE_FLAT_SUPPORT_D,
+                    slot_d=flat_slot_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     chamfer=contact_chamfer,
@@ -311,14 +314,14 @@ module fixed_driver_rack(
 
             translate([0,small_y,0]) {
                 ds_u_slot_cut(
-                    slot_d=SMALL_FLAT_SUPPORT_D,
+                    slot_d=small_slot_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness,
                     top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
-                    slot_d=SMALL_FLAT_SUPPORT_D,
+                    slot_d=small_slot_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     chamfer=small_contact_chamfer,
@@ -351,6 +354,8 @@ module long_driver_lower_guide(
     tool_axis_out=18,
     ph_y=-31,
     flat_y=4,
+    ph_guide_d=LARGE_PH_GUIDE_D,
+    flat_guide_d=LARGE_FLAT_GUIDE_D,
     root_fillet_r=DS_DEFAULT_ROOT_FILLET_R,
     contact_chamfer=0.5
 ) {
@@ -378,14 +383,14 @@ module long_driver_lower_guide(
 
             translate([0,ph_y,0]) {
                 ds_u_slot_cut(
-                    slot_d=LARGE_PH_GUIDE_D,
+                    slot_d=ph_guide_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness,
                     top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
-                    slot_d=LARGE_PH_GUIDE_D,
+                    slot_d=ph_guide_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     chamfer=contact_chamfer,
@@ -395,14 +400,14 @@ module long_driver_lower_guide(
 
             translate([0,flat_y,0]) {
                 ds_u_slot_cut(
-                    slot_d=LARGE_FLAT_GUIDE_D,
+                    slot_d=flat_guide_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness,
                     top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
-                    slot_d=LARGE_FLAT_GUIDE_D,
+                    slot_d=flat_guide_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     chamfer=contact_chamfer,
@@ -539,8 +544,11 @@ module full_ratchet_with_bits(
     shelf_thickness=6,
     ratchet_axis_out=25,
     ratchet_y=-31,
+    ratchet_slot_d=ratchet_slot_d,
     caddy_y=undef,
     caddy_inner_w=50.5,
+    caddy_inner_d=17.5,
+    caddy_capture_h=26,
     caddy_wall=3,
     caddy_lip_h=1.5,
     caddy_side_fillet_r=4,
@@ -576,14 +584,14 @@ module full_ratchet_with_bits(
                 ds_rounded_single_u_shelf(
                     width=shelf_width,
                     depth=shelf_depth,
-                    slot_d=FULL_RATCHET_HOLE_D,
+                    slot_d=ratchet_slot_d,
                     thickness=shelf_thickness,
                     front_cap_r=front_cap_r,
                     top_z=shelf_top_z
                 );
 
                 ds_u_slot_cut(
-                    slot_d=FULL_RATCHET_HOLE_D,
+                    slot_d=ratchet_slot_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness,
@@ -591,7 +599,7 @@ module full_ratchet_with_bits(
                 );
 
                 ds_u_slot_top_chamfer_cut(
-                    slot_d=FULL_RATCHET_HOLE_D,
+                    slot_d=ratchet_slot_d,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     chamfer=contact_chamfer,
@@ -604,6 +612,8 @@ module full_ratchet_with_bits(
         bit_caddy_pocket(
             center_y=caddy_center_y,
             inner_w=caddy_inner_w,
+            inner_d=caddy_inner_d,
+            capture_h=caddy_capture_h,
             wall=caddy_wall,
             front_lip_h=caddy_lip_h,
             side_front_top_fillet_r=caddy_side_fillet_r,
@@ -637,6 +647,7 @@ module stubby_ratchet_holder(
     shelf_depth=48,
     shelf_thickness=6,
     tool_axis_out=26,
+    slot_d=slot_d,
     front_cap_r=undef,
     root_fillet_r=DS_DEFAULT_ROOT_FILLET_R,
     contact_chamfer=DS_DEFAULT_CONTACT_CHAMFER
@@ -659,14 +670,14 @@ module stubby_ratchet_holder(
             ds_rounded_single_u_shelf(
                 width=shelf_width,
                 depth=shelf_depth,
-                slot_d=STUBBY_HOLE_D,
+                slot_d=slot_d,
                 thickness=shelf_thickness,
                 front_cap_r=front_cap_r,
                 top_z=shelf_top_z
             );
 
             ds_u_slot_cut(
-                slot_d=STUBBY_HOLE_D,
+                slot_d=slot_d,
                 axis_x=axis_x,
                 shelf_front_x=shelf_front_x,
                 thickness=shelf_thickness,
@@ -674,7 +685,7 @@ module stubby_ratchet_holder(
             );
 
             ds_u_slot_top_chamfer_cut(
-                slot_d=STUBBY_HOLE_D,
+                slot_d=slot_d,
                 axis_x=axis_x,
                 shelf_front_x=shelf_front_x,
                 chamfer=contact_chamfer,
