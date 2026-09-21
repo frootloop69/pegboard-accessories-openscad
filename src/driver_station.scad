@@ -20,6 +20,9 @@ use <u_holder.scad>
 // Empirical front face chosen to overlap the proven mount plate without
 // pushing accessory geometry into the board.
 DS_FACE_X = -4.0;
+// Legacy/default top Z for low-level helpers. Production accessory modules
+// compute their own top Z from pegboard_feature_top_z() so their underside
+// aligns with the mount backplate bottom for support-efficient printing.
 DS_SHELF_TOP_Z = -18.0;
 DS_EPS = 0.15;
 
@@ -249,6 +252,7 @@ module fixed_driver_rack(
 ) {
     axis_x = DS_FACE_X - tool_axis_out;
     shelf_front_x = DS_FACE_X - shelf_depth;
+    shelf_top_z = pegboard_feature_top_z(shelf_thickness, pitch, peg_d);
 
     union() {
         ds_mount(
@@ -264,7 +268,8 @@ module fixed_driver_rack(
             ds_shelf(
                 width=shelf_width,
                 depth=shelf_depth,
-                thickness=shelf_thickness
+                thickness=shelf_thickness,
+                top_z=shelf_top_z
             );
 
             translate([0,ph_y,0]) {
@@ -272,13 +277,15 @@ module fixed_driver_rack(
                     slot_d=LARGE_PH_SUPPORT_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+                    thickness=shelf_thickness,
+                    top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
                     slot_d=LARGE_PH_SUPPORT_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    chamfer=contact_chamfer
+                    chamfer=contact_chamfer,
+                    top_z=shelf_top_z
                 );
             }
 
@@ -287,13 +294,15 @@ module fixed_driver_rack(
                     slot_d=LARGE_FLAT_SUPPORT_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+                    thickness=shelf_thickness,
+                    top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
                     slot_d=LARGE_FLAT_SUPPORT_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    chamfer=contact_chamfer
+                    chamfer=contact_chamfer,
+                    top_z=shelf_top_z
                 );
             }
 
@@ -302,20 +311,23 @@ module fixed_driver_rack(
                     slot_d=SMALL_FLAT_SUPPORT_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+                    thickness=shelf_thickness,
+                    top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
                     slot_d=SMALL_FLAT_SUPPORT_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    chamfer=small_contact_chamfer
+                    chamfer=small_contact_chamfer,
+                    top_z=shelf_top_z
                 );
             }
         }
 
         ds_shelf_root_fillet(
             width=shelf_width,
-            radius=root_fillet_r
+            radius=root_fillet_r,
+            top_z=shelf_top_z
         );
     }
 }
@@ -341,6 +353,7 @@ module long_driver_lower_guide(
 ) {
     axis_x = DS_FACE_X - tool_axis_out;
     shelf_front_x = DS_FACE_X - shelf_depth;
+    shelf_top_z = pegboard_feature_top_z(shelf_thickness, pitch, peg_d);
 
     union() {
         ds_mount(
@@ -356,7 +369,8 @@ module long_driver_lower_guide(
             ds_shelf(
                 width=shelf_width,
                 depth=shelf_depth,
-                thickness=shelf_thickness
+                thickness=shelf_thickness,
+                top_z=shelf_top_z
             );
 
             translate([0,ph_y,0]) {
@@ -364,13 +378,15 @@ module long_driver_lower_guide(
                     slot_d=LARGE_PH_GUIDE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+                    thickness=shelf_thickness,
+                    top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
                     slot_d=LARGE_PH_GUIDE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    chamfer=contact_chamfer
+                    chamfer=contact_chamfer,
+                    top_z=shelf_top_z
                 );
             }
 
@@ -379,20 +395,23 @@ module long_driver_lower_guide(
                     slot_d=LARGE_FLAT_GUIDE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+                    thickness=shelf_thickness,
+                    top_z=shelf_top_z
                 );
                 ds_u_slot_top_chamfer_cut(
                     slot_d=LARGE_FLAT_GUIDE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    chamfer=contact_chamfer
+                    chamfer=contact_chamfer,
+                    top_z=shelf_top_z
                 );
             }
         }
 
         ds_shelf_root_fillet(
             width=shelf_width,
-            radius=root_fillet_r
+            radius=root_fillet_r,
+            top_z=shelf_top_z
         );
     }
 }
@@ -528,10 +547,11 @@ module full_ratchet_with_bits(
 ) {
     axis_x = DS_FACE_X - ratchet_axis_out;
     shelf_front_x = DS_FACE_X - shelf_depth;
+    shelf_top_z = pegboard_feature_top_z(shelf_thickness, pitch, peg_d);
 
     // Auto-align the caddy's outer edge with the outer edge of the 5-column
     // pegboard backplate while preserving the full tested pocket width.
-    mount_half_w = ((5 - 1) * pitch) / 2 + peg_d / 2;
+    mount_half_w = pegboard_mount_outer_half_width(5, pitch, peg_d);
     caddy_outer_w = caddy_inner_w + 2 * caddy_wall;
     caddy_center_y = is_undef(caddy_y)
         ? mount_half_w - caddy_outer_w / 2
@@ -555,21 +575,24 @@ module full_ratchet_with_bits(
                     depth=shelf_depth,
                     slot_d=FULL_RATCHET_HOLE_D,
                     thickness=shelf_thickness,
-                    front_cap_r=front_cap_r
+                    front_cap_r=front_cap_r,
+                    top_z=shelf_top_z
                 );
 
                 ds_u_slot_cut(
                     slot_d=FULL_RATCHET_HOLE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+                    thickness=shelf_thickness,
+                    top_z=shelf_top_z
                 );
 
                 ds_u_slot_top_chamfer_cut(
                     slot_d=FULL_RATCHET_HOLE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
-                    chamfer=contact_chamfer
+                    chamfer=contact_chamfer,
+                    top_z=shelf_top_z
                 );
             }
 
@@ -581,7 +604,7 @@ module full_ratchet_with_bits(
             wall=caddy_wall,
             front_lip_h=caddy_lip_h,
             side_front_top_fillet_r=caddy_side_fillet_r,
-            base_z=DS_SHELF_TOP_Z - shelf_thickness + caddy_wall
+            base_z=shelf_top_z - shelf_thickness + caddy_wall
         );
 
         // Root reinforcement exists only behind the ratchet U, not across the
@@ -589,7 +612,8 @@ module full_ratchet_with_bits(
         translate([0,ratchet_y,0])
             ds_shelf_root_fillet(
                 width=shelf_width,
-                radius=root_fillet_r
+                radius=root_fillet_r,
+                top_z=shelf_top_z
             );
     }
 }
@@ -616,6 +640,7 @@ module stubby_ratchet_holder(
 ) {
     axis_x = DS_FACE_X - tool_axis_out;
     shelf_front_x = DS_FACE_X - shelf_depth;
+    shelf_top_z = pegboard_feature_top_z(shelf_thickness, pitch, peg_d);
 
     union() {
         ds_mount(
@@ -633,27 +658,31 @@ module stubby_ratchet_holder(
                 depth=shelf_depth,
                 slot_d=STUBBY_HOLE_D,
                 thickness=shelf_thickness,
-                front_cap_r=front_cap_r
+                front_cap_r=front_cap_r,
+                top_z=shelf_top_z
             );
 
             ds_u_slot_cut(
                 slot_d=STUBBY_HOLE_D,
                 axis_x=axis_x,
                 shelf_front_x=shelf_front_x,
-                thickness=shelf_thickness
+                thickness=shelf_thickness,
+                top_z=shelf_top_z
             );
 
             ds_u_slot_top_chamfer_cut(
                 slot_d=STUBBY_HOLE_D,
                 axis_x=axis_x,
                 shelf_front_x=shelf_front_x,
-                chamfer=contact_chamfer
+                chamfer=contact_chamfer,
+                top_z=shelf_top_z
             );
         }
 
         ds_shelf_root_fillet(
             width=shelf_width,
-            radius=root_fillet_r
+            radius=root_fillet_r,
+            top_z=shelf_top_z
         );
     }
 }
