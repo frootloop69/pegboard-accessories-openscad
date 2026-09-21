@@ -32,3 +32,7 @@
 - Switched the production fixed-driver rack, full-size ratchet holder, and
   Stanley stubby holder to front-loading U-shaped supports.
 - Retained the lower long-driver guide only as an optional fallback.
+
+- Refined the Stanley stubby production holder with semicircular U-arm
+  endcaps and a parameterized 4 mm concave shelf-to-backplate root fillet.
+  The validated 33.0 mm tool-support slot is unchanged.
