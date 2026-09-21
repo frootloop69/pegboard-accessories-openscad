@@ -18,3 +18,7 @@
   drivers too top-heavy.
 - Revised fixed-driver rack to closed 20.0 / 21.5 / 6.9 mm handle-support
   holes; lower shaft guide retained only as an optional fallback.
+
+- Added an all-driver U-slot comparison coupon using the current
+  20.0 / 21.5 / 6.9 / 30.0 / 33.0 mm support diameters; production holder
+  geometry is intentionally unchanged pending physical test.
