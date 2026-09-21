@@ -4,7 +4,8 @@
 
 A modular driver station for the electronics/retro-computing workbench. The
 station uses the physically validated `EUREKA_WORKSPACE` pegboard mount
-(25.4 mm pitch, 5.5 mm peg diameter).
+(25.4 mm pitch; current production peg diameter **5.2 mm** for Creality Hyper
+PLA in the standard axis-aligned print orientation).
 
 The design is intentionally split into independent modules so a single tool
 can be changed without reprinting the entire station.
@@ -267,8 +268,8 @@ All current production driver-station accessories now follow the repository
 print-efficiency rule: the underside of each primary front feature is aligned
 with the lower edge of its pegboard mounting plate.
 
-For the Eureka 25.4 mm / 5.5 mm mount, the common lower plane is **Z = -28.15
-mm** in installed coordinates.
+For the current Eureka 25.4 mm / 5.2 mm Creality Hyper PLA production preset,
+the common lower plane is **Z = -28.0 mm** in installed coordinates.
 
 Current application:
 
