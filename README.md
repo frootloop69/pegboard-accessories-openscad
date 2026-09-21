@@ -9,6 +9,8 @@ Parametric OpenSCAD tooling for designing 3D-printable pegboard accessories for 
 - Keep tool-holder geometry separate from pegboard mounting geometry.
 - Generate holders from measurable dimensions rather than hand-editing STLs.
 - Maintain physical test results and hardware presets in source control.
+- Align production accessory bottoms with the mount backplate bottom wherever
+  practical to minimize support material.
 
 ## Current hardware presets
 
@@ -80,3 +82,12 @@ Measured tool dimensions, physical test results, and V2 clearances are documente
 `src/u_holder.scad` contains reusable U-slot, contact-chamfer, root-fillet,
 and rounded-end shelf primitives. New pegboard accessories should use these
 helpers rather than reimplementing U-shaped tool supports.
+
+
+## Print-orientation design rule
+
+Production accessories should normally share their lowest front-feature plane
+with the bottom edge of the common mounting backplate. Use
+`pegboard_feature_top_z()` from `src/mount.scad` rather than hard-coding a
+vertical offset. Functional requirements may override this, but unnecessary
+air gaps should not be designed into new holders.
