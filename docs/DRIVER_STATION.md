@@ -294,3 +294,25 @@ rotate to its narrower orientation and slip through.
 The production U-slot is therefore reduced by approximately 3 mm to
 **27.0 mm**. This is intentionally close to the measured 27.26 mm neck and
 should support the irregular handle more consistently around its full rotation.
+
+
+## User-facing Customizer scripts
+
+The four production example files are now intentionally user-editable
+OpenSCAD Customizer front ends. Use **Window -> Customizer** to expose grouped
+controls without editing the reusable implementation modules directly.
+
+The scripts expose, as appropriate:
+
+- Eureka mount calibration values, including the current 5.2 mm Hyper PLA peg
+  diameter
+- shelf dimensions and tool-axis position
+- U-slot/guide diameters
+- tool left/right positions
+- ratchet bit-caddy width, depth, wall, lip and capture dimensions
+- automatic/manual caddy alignment
+- automatic/manual rounded U-arm end radius
+- root fillet and contact chamfer dimensions
+
+A detailed parameter description block is also included at the top of each
+example file.
