@@ -453,18 +453,24 @@ module bit_caddy_pocket(
 
 
 // Full-size ratchet + its bit caddy as one module.
+//
+// The ratchet support is now a localized U shelf rather than a full-width
+// rectangular shelf. The bit-caddy pocket is structurally independent and
+// already has its own floor/rear wall, so the large slab between/under the two
+// functions was unnecessary material.
 module full_ratchet_with_bits(
     pitch=25.4,
     peg_d=5.5,
     board_geom=5.0,
     hook_offset=4.5,
     neck_length=0.5,
-    shelf_width=107,
+    shelf_width=45,
     shelf_depth=46,
     shelf_thickness=6,
     ratchet_axis_out=25,
     ratchet_y=-31,
     caddy_y=27,
+    front_cap_r=undef,
     root_fillet_r=DS_DEFAULT_ROOT_FILLET_R,
     contact_chamfer=DS_DEFAULT_CONTACT_CHAMFER
 ) {
@@ -481,20 +487,24 @@ module full_ratchet_with_bits(
             neck_length=neck_length
         );
 
-        difference() {
-            ds_shelf(
-                width=shelf_width,
-                depth=shelf_depth,
-                thickness=shelf_thickness
-            );
+        // Localized ratchet U support only.
+        translate([0,ratchet_y,0])
+            difference() {
+                ds_rounded_single_u_shelf(
+                    width=shelf_width,
+                    depth=shelf_depth,
+                    slot_d=FULL_RATCHET_HOLE_D,
+                    thickness=shelf_thickness,
+                    front_cap_r=front_cap_r
+                );
 
-            translate([0,ratchet_y,0]) {
                 ds_u_slot_cut(
                     slot_d=FULL_RATCHET_HOLE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness
                 );
+
                 ds_u_slot_top_chamfer_cut(
                     slot_d=FULL_RATCHET_HOLE_D,
                     axis_x=axis_x,
@@ -502,14 +512,17 @@ module full_ratchet_with_bits(
                     chamfer=contact_chamfer
                 );
             }
-        }
 
+        // Bit caddy keeps only its own required pocket geometry.
         bit_caddy_pocket(center_y=caddy_y);
 
-        ds_shelf_root_fillet(
-            width=shelf_width,
-            radius=root_fillet_r
-        );
+        // Root reinforcement exists only behind the ratchet U, not across the
+        // material-free region beside the caddy.
+        translate([0,ratchet_y,0])
+            ds_shelf_root_fillet(
+                width=shelf_width,
+                radius=root_fillet_r
+            );
     }
 }
 
