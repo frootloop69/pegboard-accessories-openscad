@@ -237,6 +237,61 @@ module ds_u_slot_cut(
 }
 
 
+// Top-edge chamfer for an open U slot.
+// Removes a tapered band only from the top inside edge of the U, leaving the
+// validated straight-wall support diameter unchanged below the chamfer.
+// With chamfer=1.0 this is approximately a 1 mm x 1 mm (45-degree) break.
+module ds_u_slot_top_chamfer_cut(
+    slot_d,
+    axis_x,
+    shelf_front_x,
+    chamfer=1.0,
+    top_z=DS_SHELF_TOP_Z,
+    eps=0.05
+) {
+    if (chamfer > 0)
+        hull() {
+            // Nominal U profile at the bottom of the chamfer.
+            union() {
+                translate([axis_x,0,top_z-chamfer-eps])
+                    cylinder(d=slot_d, h=eps, $fn=64);
+
+                translate([
+                    shelf_front_x-eps,
+                    -slot_d/2,
+                    top_z-chamfer-eps
+                ])
+                    cube([
+                        axis_x - shelf_front_x + slot_d/2 + 2*eps,
+                        slot_d,
+                        eps
+                    ]);
+            }
+
+            // Expanded U profile at the top surface.
+            union() {
+                translate([axis_x,0,top_z+eps])
+                    cylinder(
+                        d=slot_d + 2*chamfer,
+                        h=eps,
+                        $fn=64
+                    );
+
+                translate([
+                    shelf_front_x-eps,
+                    -(slot_d/2 + chamfer),
+                    top_z+eps
+                ])
+                    cube([
+                        axis_x - shelf_front_x + slot_d/2 + chamfer + 2*eps,
+                        slot_d + 2*chamfer,
+                        eps
+                    ]);
+            }
+        }
+}
+
+
 // Fixed screwdriver rack.
 // Tool order left-to-right when viewed from the front:
 //   large Phillips, large flat-blade, small flat-blade.
@@ -467,8 +522,9 @@ module full_ratchet_with_bits(
 
 // Stanley stubby ratchet U-slot holder.
 // The U arms use semicircular front endcaps and a concave root fillet where
-// the shelf meets the pegboard plate. These changes are structural/aesthetic;
-// the physically validated 33 mm support slot is unchanged.
+// the shelf meets the pegboard plate. A small top-edge chamfer is also applied
+// to the inner U where the handle rests. The physically validated 33 mm
+// straight-wall support slot is unchanged below that chamfer.
 module stubby_ratchet_holder(
     pitch=25.4,
     peg_d=5.5,
@@ -480,7 +536,8 @@ module stubby_ratchet_holder(
     shelf_thickness=6,
     tool_axis_out=26,
     front_cap_r=undef,
-    root_fillet_r=4
+    root_fillet_r=4,
+    contact_chamfer=1.0
 ) {
     axis_x = DS_FACE_X - tool_axis_out;
     shelf_front_x = DS_FACE_X - shelf_depth;
@@ -509,6 +566,13 @@ module stubby_ratchet_holder(
                 axis_x=axis_x,
                 shelf_front_x=shelf_front_x,
                 thickness=shelf_thickness
+            );
+
+            ds_u_slot_top_chamfer_cut(
+                slot_d=STUBBY_HOLE_D,
+                axis_x=axis_x,
+                shelf_front_x=shelf_front_x,
+                chamfer=contact_chamfer
             );
         }
 
