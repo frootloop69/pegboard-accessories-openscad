@@ -135,3 +135,18 @@ It tests the same U-shaped support concept used by the production holders:
 The slots have straight sides and no entry chamfer. The U-slot concept has now
 been physically validated; the coupon remains useful for future printer/material
 fit checks.
+
+
+## Stubby holder edge treatment
+
+The Stanley stubby production holder now adds two geometry refinements without
+changing the validated 33.0 mm U-slot:
+
+- **Semicircular front endcaps** on both U arms. By default the radius is half
+  the arm width, so each arm terminates in a true rounded nose.
+- **4 mm concave root fillet** where the horizontal U shelf meets the vertical
+  pegboard mounting plate.
+
+Both are parameterized in `stubby_ratchet_holder()` as `front_cap_r` and
+`root_fillet_r`. The rounded ends are primarily ergonomic/aesthetic; the root
+fillet also reduces the stress concentration at the cantilevered shelf joint.
