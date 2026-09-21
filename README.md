@@ -64,10 +64,10 @@ The project is intended to work with the normal OpenSCAD desktop application. Ge
 The first production accessory is a modular electronics-workbench driver
 station. It includes:
 
-- three-slot fixed screwdriver rack
-- optional lower guide for the two long drivers
+- three-hole handle-support screwdriver rack
+- optional lower guide for the two long drivers (fallback)
 - full-size ratchet drop-through holder with adjacent bit-caddy pocket
 - Stanley stubby ratchet drop-through holder
 
-Measured tool dimensions and V1 clearances are documented in
+Measured tool dimensions, physical test results, and V2 clearances are documented in
 `docs/DRIVER_STATION.md`.
