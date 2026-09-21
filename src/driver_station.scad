@@ -69,7 +69,10 @@ SMALL_FLAT_SUPPORT_D = 6.9;
 LARGE_PH_GUIDE_D = 6.7;
 LARGE_FLAT_GUIDE_D = 8.0;
 
-FULL_RATCHET_HOLE_D = 30.0;
+// Full-size ratchet handle is not perfectly round. A 30 mm support fit the
+// widest orientation but could slip through at the narrow orientation.
+// Production support reduced by 3 mm after physical testing.
+FULL_RATCHET_HOLE_D = 27.0;
 STUBBY_HOLE_D = 33.0;
 
 // Small top edge break. Kept deliberately small because both ratchet handles
@@ -729,7 +732,7 @@ module driver_station_fit_coupon(
 //   22.0  large Phillips
 //   21.5  large flat-blade
 //    6.9  small flat-blade
-//   30.0  full-size ratchet
+//   27.0  full-size ratchet
 //   33.0  Stanley stubby
 //
 // Each circular seat opens to the +X edge with a straight channel equal to
