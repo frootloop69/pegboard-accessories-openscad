@@ -94,3 +94,7 @@
   bottom exactly to Z=0.
 - Established this as the repository-wide production print-axis rule to avoid
   stepped fill and poor bed contact from side-oriented geometry.
+
+- Reduced the full-size ratchet U-slot from **30.0 mm to 27.0 mm** after
+  physical testing showed the non-circular handle could rotate and slip
+  through the 30 mm opening.
