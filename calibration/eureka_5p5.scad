@@ -1,2 +1,3 @@
-CAL_PEG_D = 5.5;
-include <default_mount_coupon.scad>
+use <default_mount_coupon.scad>
+
+mount_calibration_coupon(peg_d=5.5);
