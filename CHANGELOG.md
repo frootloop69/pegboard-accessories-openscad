@@ -40,3 +40,10 @@
 - Added a parameterized **1.0 mm top-edge contact chamfer** to the inside of
   the Stanley stubby 33.0 mm U-slot. The validated straight-wall support
   diameter remains unchanged below the chamfer.
+
+- Generalized U-holder finishing into `src/u_holder.scad`.
+- Applied the shared root fillet and top-edge contact chamfer to the fixed
+  driver rack, full-size ratchet holder, Stanley stubby holder, and optional
+  long-driver lower guide.
+- Standard defaults are 4.0 mm root fillet and 1.0 mm contact chamfer, with
+  reduced chamfers for small/support-guide geometry where appropriate.
