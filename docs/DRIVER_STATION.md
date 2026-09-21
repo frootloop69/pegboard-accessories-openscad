@@ -26,19 +26,28 @@ Full-size ratchet bit caddy:
 - body depth: 15.98 mm
 - bits protrude approximately 13 mm beyond the body depth
 
-## V1 interfaces
+## V2 interfaces
 
 ### Fixed-driver rack
 
-Open-front U-slots:
+The first physical coupon confirmed that the original shaft-sized openings fit,
+but the three fixed drivers sat too high and were top-heavy. V2 changes the
+upper rack to closed circular drop-through holes so each tool settles farther
+into its handle/neck transition, using the same balance principle as the
+ratcheting drivers.
 
-- large Phillips: 6.7 mm
-- large flat-blade: 8.0 mm
-- small flat-blade: 2.8 mm
+Current hole diameters:
 
-The two long drivers have a separate optional lower guide. Install the lower
-guide on the same pegboard columns, nominally two grid rows (50.8 mm) below
-the upper rack.
+- large Phillips: **20.0 mm**
+- large flat-blade: **21.5 mm**
+- small flat-blade: **6.9 mm**
+
+These three holes are deliberately straight-sided with **no top chamfer**.
+That preserves the small retaining shoulder on the 7.5 mm small-flat handle.
+
+The separate lower guide for the two long drivers remains available as a
+fallback, but it is no longer expected to be necessary if the V2 support-hole
+geometry balances the tools as intended.
 
 ### Full-size ratchet
 
@@ -55,6 +64,17 @@ the upper rack.
 
 The simple drop-through geometry is deliberate: the handles are wider than
 their necks and therefore form their own retaining shoulder.
+
+### Physical test result — 2026-09-20
+
+The first fit coupon was tested on the actual tools:
+
+- full-size ratchet, 30 mm hole: fits and balances well
+- Stanley stubby, 33 mm hole: fits and balances well
+- original fixed-driver shaft openings: dimensional fit was good, but all
+  three fixed drivers were too top-heavy
+
+This test directly drove the V2 fixed-driver hole sizes above.
 
 ## Source files
 
@@ -75,14 +95,14 @@ Optional local-clearance test:
 
 ## Suggested validation sequence
 
-1. Render and print `calibration/driver_station_fit_coupon.scad` if you want
-   to verify the 30/33 mm ratchet holes and the three U-slot clearances with
-   minimal filament.
-2. Print the fixed-driver rack and confirm one-handed insertion/removal.
-3. Install the lower guide only if the long drivers benefit from additional
-   stabilization.
-4. Print the ratchet/caddy module.
-5. Print the stubby module.
+1. Print the updated `calibration/driver_station_fit_coupon.scad` to verify
+   the new 20.0 / 21.5 / 6.9 mm fixed-driver support holes.
+2. Confirm that all three fixed drivers now settle lower and balance by their
+   handles/handle transitions.
+3. Print the fixed-driver rack.
+4. Add the lower guide only if either long driver still swings excessively.
+5. The 30 mm full-size-ratchet and 33 mm stubby interfaces are already
+   physically confirmed to fit and balance well.
 
 All parts should be printed at 100% scale. PETG is preferred for the final
 working parts; PLA is acceptable for fit checks.
