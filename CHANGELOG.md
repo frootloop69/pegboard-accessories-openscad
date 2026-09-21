@@ -47,3 +47,9 @@
   long-driver lower guide.
 - Standard defaults are 4.0 mm root fillet and 1.0 mm contact chamfer, with
   reduced chamfers for small/support-guide geometry where appropriate.
+
+- Removed the large unused full-width shelf from the full-size ratchet/caddy
+  holder. The ratchet now uses a localized **45 mm-wide** rounded U shelf,
+  while the bit caddy keeps only its own pocket structure.
+- Restricted the ratchet root fillet to the localized U support, eliminating
+  the remaining material strip across the intentionally open region.
