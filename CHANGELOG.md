@@ -67,3 +67,8 @@
   The common pegboard backplate now serves as the pocket rear wall directly.
 - Preserved the 17.5 mm internal caddy depth while eliminating the redundant
   double-wall thickness.
+
+- Reduced the bit-caddy front lip to **1.5 mm above the inside floor** so the
+  protruding bits clear the pocket.
+- Kept the compact 17.5 mm internal pocket depth instead of enlarging the
+  pocket to ~29 mm.
