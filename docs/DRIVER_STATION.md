@@ -248,3 +248,14 @@ The pocket therefore remains at the compact **17.5 mm internal front-to-back
 depth** rather than being enlarged to roughly 29 mm. If a deeper capture is
 ever preferred, the alternative is to increase `inner_d` to about 29 mm and
 use a taller front lip.
+
+
+## Bit-caddy side-wall fillets
+
+The two exposed front/top edges of the bit-caddy side walls now use a
+**4 mm convex fillet**. The fillet is applied in the side-wall X/Z profile,
+so it rounds the sharp free-end edges marked in the design review without
+changing the pocket's internal width.
+
+The radius is exposed as `caddy_side_fillet_r` in
+`full_ratchet_with_bits()`.
