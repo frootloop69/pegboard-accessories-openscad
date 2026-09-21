@@ -12,10 +12,12 @@ PRESET_SPAMPUR_PRINTER  = 1;
 
 function board_pitch(preset) = 25.4;
 
+// Eureka production default is calibrated for Creality Hyper PLA in the
+// repository-standard axis-aligned print orientation.
 function peg_diameter(preset) =
-    preset == PRESET_EUREKA_WORKSPACE ? 5.5 :
+    preset == PRESET_EUREKA_WORKSPACE ? 5.2 :
     preset == PRESET_SPAMPUR_PRINTER  ? 6.2 : // latest tested value; still loose
-    5.5;
+    5.2;
 
 function hook_offset(preset) = 4.5;
 function hook_neck(preset) = 0.5;
