@@ -62,3 +62,8 @@
   Internal pocket width is unchanged.
 - Made caddy side alignment automatic by default while retaining `caddy_y`
   as an optional manual override.
+
+- Removed the separate rear wall from the full-size ratchet bit-caddy pocket.
+  The common pegboard backplate now serves as the pocket rear wall directly.
+- Preserved the 17.5 mm internal caddy depth while eliminating the redundant
+  double-wall thickness.
