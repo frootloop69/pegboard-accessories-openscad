@@ -7,9 +7,9 @@
     - accessory projects toward negative X
     - tools hang toward negative Z
 
-  V1 is deliberately simple:
-    - open U-slot shelf for fixed screwdrivers
-    - optional lower shaft guide for the two long drivers
+  V2 uses the successful drop-through principle for all primary drivers:
+    - circular handle-support holes for the three fixed screwdrivers
+    - optional lower shaft guide retained as a fallback for the two long drivers
     - circular drop-through shelves for ratcheting drivers
     - shallow lower pocket for the full-size ratchet bit caddy
 */
@@ -53,10 +53,17 @@ BIT_CADDY_W = 48.9;
 BIT_CADDY_D = 15.98;
 BIT_PROTRUSION = 13.0;
 
-// V1 working clearances.
-LARGE_PH_SLOT_D = 6.7;
-LARGE_FLAT_SLOT_D = 8.0;
-SMALL_FLAT_SLOT_D = 2.8;
+// V2 fixed-driver support holes, based on the first physical fit coupon.
+// The original shaft-sized U slots fitted, but left the fixed drivers too
+// top-heavy. These larger closed holes let each tool drop farther until the
+// handle/neck transition supports it, using the same principle as the ratchets.
+LARGE_PH_HOLE_D = 20.0;
+LARGE_FLAT_HOLE_D = 21.5;
+SMALL_FLAT_HOLE_D = 6.9;
+
+// Original shaft guide sizes retained only for the optional lower guide.
+LARGE_PH_GUIDE_D = 6.7;
+LARGE_FLAT_GUIDE_D = 8.0;
 
 FULL_RATCHET_HOLE_D = 30.0;
 STUBBY_HOLE_D = 33.0;
@@ -150,6 +157,14 @@ module ds_u_slot_cut(
 // Fixed screwdriver rack.
 // Tool order left-to-right when viewed from the front:
 //   large Phillips, large flat-blade, small flat-blade.
+//
+// V2 uses closed circular holes rather than open shaft-sized U slots. The first
+// physical coupon proved the U-slot clearances, but the tools sat too high and
+// were top-heavy. Larger holes let them settle farther into the handle/neck
+// transition and balance like the ratcheting drivers.
+//
+// No entry chamfer is used here. This is especially important for the small
+// flat-blade: its 7.5 mm handle gives only a small shoulder over the 6.9 mm hole.
 module fixed_driver_rack(
     pitch=25.4,
     peg_d=5.5,
@@ -165,7 +180,6 @@ module fixed_driver_rack(
     small_y=31
 ) {
     axis_x = DS_FACE_X - tool_axis_out;
-    shelf_front_x = DS_FACE_X - shelf_depth;
 
     union() {
         ds_mount(
@@ -184,28 +198,25 @@ module fixed_driver_rack(
                 thickness=shelf_thickness
             );
 
-            translate([0,ph_y,0])
-                ds_u_slot_cut(
-                    slot_d=LARGE_PH_SLOT_D,
-                    axis_x=axis_x,
-                    shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+            translate([axis_x,ph_y,0])
+                ds_drop_hole_cut(
+                    d=LARGE_PH_HOLE_D,
+                    thickness=shelf_thickness,
+                    edge_break=0
                 );
 
-            translate([0,flat_y,0])
-                ds_u_slot_cut(
-                    slot_d=LARGE_FLAT_SLOT_D,
-                    axis_x=axis_x,
-                    shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+            translate([axis_x,flat_y,0])
+                ds_drop_hole_cut(
+                    d=LARGE_FLAT_HOLE_D,
+                    thickness=shelf_thickness,
+                    edge_break=0
                 );
 
-            translate([0,small_y,0])
-                ds_u_slot_cut(
-                    slot_d=SMALL_FLAT_SLOT_D,
-                    axis_x=axis_x,
-                    shelf_front_x=shelf_front_x,
-                    thickness=shelf_thickness
+            translate([axis_x,small_y,0])
+                ds_drop_hole_cut(
+                    d=SMALL_FLAT_HOLE_D,
+                    thickness=shelf_thickness,
+                    edge_break=0
                 );
         }
     }
@@ -250,7 +261,7 @@ module long_driver_lower_guide(
 
             translate([0,ph_y,0])
                 ds_u_slot_cut(
-                    slot_d=LARGE_PH_SLOT_D,
+                    slot_d=LARGE_PH_GUIDE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness
@@ -258,7 +269,7 @@ module long_driver_lower_guide(
 
             translate([0,flat_y,0])
                 ds_u_slot_cut(
-                    slot_d=LARGE_FLAT_SLOT_D,
+                    slot_d=LARGE_FLAT_GUIDE_D,
                     axis_x=axis_x,
                     shelf_front_x=shelf_front_x,
                     thickness=shelf_thickness
@@ -427,18 +438,15 @@ module driver_station_fit_coupon(
         translate([18,72,-DS_EPS])
             cylinder(d=STUBBY_HOLE_D, h=thickness+2*DS_EPS, $fn=64);
 
-        // Open U slots along the opposite edge.
-        for (spec = [
-            [LARGE_PH_SLOT_D, 18],
-            [LARGE_FLAT_SLOT_D, 40],
-            [SMALL_FLAT_SLOT_D, 59]
-        ]) {
-            d = spec[0];
-            y = spec[1];
-            translate([plate_d-14,y,-DS_EPS])
-                cylinder(d=d, h=thickness+2*DS_EPS, $fn=48);
-            translate([plate_d-14,y-d/2,-DS_EPS])
-                cube([15,d,thickness+2*DS_EPS]);
-        }
+        // V2 fixed-driver drop-through holes.
+        // Deliberately straight-sided with no top chamfer.
+        translate([plate_d-18,18,-DS_EPS])
+            cylinder(d=LARGE_PH_HOLE_D, h=thickness+2*DS_EPS, $fn=64);
+
+        translate([plate_d-18,47,-DS_EPS])
+            cylinder(d=LARGE_FLAT_HOLE_D, h=thickness+2*DS_EPS, $fn=64);
+
+        translate([plate_d-18,68,-DS_EPS])
+            cylinder(d=SMALL_FLAT_HOLE_D, h=thickness+2*DS_EPS, $fn=48);
     }
 }
