@@ -150,3 +150,14 @@ changing the validated 33.0 mm U-slot:
 Both are parameterized in `stubby_ratchet_holder()` as `front_cap_r` and
 `root_fillet_r`. The rounded ends are primarily ergonomic/aesthetic; the root
 fillet also reduces the stress concentration at the cantilevered shelf joint.
+
+
+## Stubby U-slot contact chamfer
+
+The Stanley stubby holder now has a **1.0 mm 45-degree top-edge chamfer** on
+the inside of the 33.0 mm U-slot where the handle rests.
+
+The chamfer is parameterized as `contact_chamfer` in
+`stubby_ratchet_holder()`. The 33.0 mm straight-wall support diameter remains
+unchanged below the chamfer, so the validated retention geometry is preserved
+while the contact edge is less sharp against the handle.
