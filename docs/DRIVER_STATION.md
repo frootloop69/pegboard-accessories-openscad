@@ -236,3 +236,15 @@ The pocket keeps the same **17.5 mm internal depth** by shifting the front lip,
 floor, and side walls toward the backplate. Those parts overlap the backplate by
 a small epsilon for a robust OpenSCAD union, but there is no longer a doubled
 3 mm wall at the rear.
+
+
+## Bit-caddy front-lip clearance
+
+The full-size ratchet bit-caddy pocket now limits the front lip to **1.5 mm
+above the inside floor**. This is the maximum clearance that still lets the
+protruding bits fit without interference.
+
+The pocket therefore remains at the compact **17.5 mm internal front-to-back
+depth** rather than being enlarged to roughly 29 mm. If a deeper capture is
+ever preferred, the alternative is to increase `inner_d` to about 29 mm and
+use a taller front lip.
