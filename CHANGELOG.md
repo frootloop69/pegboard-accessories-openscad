@@ -22,3 +22,13 @@
 - Added an all-driver U-slot comparison coupon using the current
   20.0 / 21.5 / 6.9 / 30.0 / 33.0 mm support diameters; production holder
   geometry is intentionally unchanged pending physical test.
+
+## 2026-09-21
+
+- Physically tested the all-driver U-slot coupon; U-shaped supports work well
+  for all five drivers.
+- Increased the large Phillips support diameter from 20.0 mm to **22.0 mm**.
+- Locked current support sizes at 22.0 / 21.5 / 6.9 / 30.0 / 33.0 mm.
+- Switched the production fixed-driver rack, full-size ratchet holder, and
+  Stanley stubby holder to front-loading U-shaped supports.
+- Retained the lower long-driver guide only as an optional fallback.
