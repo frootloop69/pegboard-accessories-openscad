@@ -13,7 +13,7 @@ can be changed without reprinting the entire station.
 
 | Tool | Shaft / neck | Handle | Overall length |
 |---|---:|---:|---:|
-| Large Phillips | shaft 5.9 mm; neck 10.45 mm | 26.5 mm dia | 230 mm |
+| Large Phillips | shaft 5.9 mm; neck 10.45 mm | 26.5 mm dia | 227 mm |
 | Large flat-blade | shaft 7.2 mm; neck 17.2 mm | 28.65 mm dia | 200 mm |
 | Small flat-blade | shaft 2.0 mm; neck 6.99 mm | 7.5 mm dia | 85.03 mm |
 | Full-size ratchet | neck 27.26 mm | 32.46 mm dia; 104.10 mm handle length | 160 mm |
@@ -50,7 +50,7 @@ the successful coupon.
 
 ### Full-size ratchet
 
-- **30.0 mm U-slot**
+- **27.0 mm U-slot**
 - 6 mm shelf
 - adjacent shallow pocket for the bit caddy
 
@@ -66,7 +66,7 @@ loaded from the front instead of requiring a vertical drop-through motion.
 
 **2026-09-20 — first fit coupon**
 
-- full-size ratchet, 30 mm closed hole: fits and balances well
+- full-size ratchet, 27 mm closed hole: fits and balances well
 - Stanley stubby, 33 mm closed hole: fits and balances well
 - original shaft-sized fixed-driver openings: dimensional fit was good, but
   all three fixed drivers were too top-heavy
@@ -76,7 +76,7 @@ loaded from the front instead of requiring a vertical drop-through motion.
 - U-shaped support works well for all five drivers
 - large flat-blade at 21.5 mm: accepted
 - small flat-blade at 6.9 mm: accepted
-- full-size ratchet at 30.0 mm: accepted
+- full-size ratchet at 27.0 mm: accepted
 - Stanley stubby at 33.0 mm: accepted
 - large Phillips at 20.0 mm: functional but should be enlarged by 2 mm
 - production large-Phillips slot therefore set to **22.0 mm**
@@ -129,7 +129,7 @@ It tests the same U-shaped support concept used by the production holders:
 - 22.0 mm — large Phillips
 - 21.5 mm — large flat-blade
 - 6.9 mm — small flat-blade
-- 30.0 mm — full-size ratchet
+- 27.0 mm — full-size ratchet
 - 33.0 mm — Stanley stubby
 
 The slots have straight sides and no entry chamfer. The U-slot concept has now
@@ -192,13 +192,13 @@ contact-chamfer system.
 
 The full-size ratchet/caddy module no longer uses a 107 mm-wide solid shelf.
 The ratchet now has a **45 mm-wide localized U support** centered on the
-validated 30 mm slot, while the bit caddy retains only its own pocket floor and
+validated 27 mm slot, while the bit caddy retains only its own pocket floor and
 walls.
 
 This removes the large unused slab between/beneath the two functions while
 preserving:
 
-- 30.0 mm ratchet U-slot
+- 27.0 mm ratchet U-slot
 - 1.0 mm top contact chamfer
 - rounded U-arm ends
 - 4.0 mm root fillet behind the ratchet support
@@ -282,3 +282,14 @@ Current application:
 The vertical position is calculated from `pegboard_feature_top_z()`, so it
 tracks pitch and peg diameter rather than relying on a Eureka-specific
 hard-coded offset.
+
+
+## Full-size ratchet support revision — 2026-09-21
+
+The full-size ratchet handle is slightly non-circular. The previous **30.0 mm**
+U-slot supported the handle at its widest orientation, but the handle could
+rotate to its narrower orientation and slip through.
+
+The production U-slot is therefore reduced by approximately 3 mm to
+**27.0 mm**. This is intentionally close to the measured 27.26 mm neck and
+should support the irregular handle more consistently around its full rotation.
