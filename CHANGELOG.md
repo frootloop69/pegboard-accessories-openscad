@@ -72,3 +72,6 @@
   protruding bits clear the pocket.
 - Kept the compact 17.5 mm internal pocket depth instead of enlarging the
   pocket to ~29 mm.
+
+- Added 4 mm convex fillets to the two exposed front/top edges of the
+  full-size ratchet bit-caddy side walls.
