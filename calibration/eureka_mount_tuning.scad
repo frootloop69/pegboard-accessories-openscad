@@ -7,6 +7,8 @@
   Suggested starting point for the previously validated setup: 5.5 mm.
 */
 
+use <default_mount_coupon.scad>
+
 CAL_PEG_D = 5.5;
 
 // Only change these if deliberately recalibrating the mount architecture.
@@ -15,4 +17,10 @@ CAL_BOARD_GEOM = 5.0;
 CAL_HOOK_OFFSET = 4.5;
 CAL_NECK = 0.5;
 
-include <default_mount_coupon.scad>
+mount_calibration_coupon(
+    peg_d=CAL_PEG_D,
+    pitch=CAL_PITCH,
+    board_geom=CAL_BOARD_GEOM,
+    hook_offset=CAL_HOOK_OFFSET,
+    neck_length=CAL_NECK
+);
