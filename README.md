@@ -27,7 +27,7 @@ The 5.0 mm value is an empirical geometry parameter inherited from the proven re
 
 ## Repository layout
 
-- `src/` — reusable parametric OpenSCAD modules and board presets
+- `src/` — reusable parametric OpenSCAD modules, board presets, and shared U-holder geometry
 - `calibration/` — source for physical fit-test coupons
 - `examples/` — tool-holder examples built on the common mount interface
 - `docs/` — board presets, test results, design notes, and third-party references
@@ -73,3 +73,10 @@ station. It includes:
 
 Measured tool dimensions, physical test results, and V2 clearances are documented in
 `docs/DRIVER_STATION.md`.
+
+
+### Shared U-holder geometry
+
+`src/u_holder.scad` contains reusable U-slot, contact-chamfer, root-fillet,
+and rounded-end shelf primitives. New pegboard accessories should use these
+helpers rather than reimplementing U-shaped tool supports.
