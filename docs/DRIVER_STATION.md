@@ -161,3 +161,28 @@ The chamfer is parameterized as `contact_chamfer` in
 `stubby_ratchet_holder()`. The 33.0 mm straight-wall support diameter remains
 unchanged below the chamfer, so the validated retention geometry is preserved
 while the contact edge is less sharp against the handle.
+
+
+## Reusable U-holder finish system
+
+The U-holder finishing geometry is now factored into the shared library
+`src/u_holder.scad`, so future pegboard accessories can use the same design
+language without copying driver-specific code.
+
+Reusable primitives:
+
+- `u_holder_slot_cut()` — open U support
+- `u_holder_top_chamfer_cut()` — top inside contact chamfer
+- `u_holder_root_fillet()` — concave shelf/backplate root fillet
+- `u_holder_rounded_single_shelf()` — single-U shelf with rounded arm ends
+
+Driver-station defaults:
+
+- root fillet: **4.0 mm**
+- normal contact chamfer: **1.0 mm**
+- small-tool contact chamfer: **0.25 mm**
+- optional long-driver lower guide chamfer: **0.5 mm**
+
+The fixed-driver rack, full-size ratchet holder, Stanley stubby holder, and
+optional long-driver lower guide now all expose/use the shared fillet and
+contact-chamfer system.
