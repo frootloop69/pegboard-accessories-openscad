@@ -15,6 +15,7 @@
 */
 
 use <mount.scad>
+use <u_holder.scad>
 
 // Empirical front face chosen to overlap the proven mount plate without
 // pushing accessory geometry into the board.
@@ -111,9 +112,7 @@ module ds_shelf(
 }
 
 
-// Single centered-U shelf with semicircular front ends on both arms.
-// The end-cap radius defaults to half the arm width, producing a true
-// semicircular nose without changing the tested U-slot diameter.
+// Driver-station wrapper around the reusable U-holder rounded shelf.
 module ds_rounded_single_u_shelf(
     width,
     depth,
@@ -123,36 +122,15 @@ module ds_rounded_single_u_shelf(
     face_x=DS_FACE_X,
     top_z=DS_SHELF_TOP_Z
 ) {
-    arm_w = (width - slot_d) / 2;
-    cap_r = is_undef(front_cap_r) ? arm_w / 2 : min(front_cap_r, arm_w / 2);
-    front_x = face_x - depth;
-
-    union() {
-        // Main shelf body begins at the cap centerline.
-        translate([
-            front_x + cap_r,
-            -width/2,
-            top_z-thickness
-        ])
-            cube([
-                depth - cap_r,
-                width,
-                thickness
-            ]);
-
-        // Semicircular noses for the two U arms.
-        for (sy = [-1, 1])
-            translate([
-                front_x + cap_r,
-                sy * (slot_d/2 + arm_w/2),
-                top_z-thickness
-            ])
-                cylinder(
-                    r=cap_r,
-                    h=thickness,
-                    $fn=48
-                );
-    }
+    u_holder_rounded_single_shelf(
+        width=width,
+        depth=depth,
+        slot_d=slot_d,
+        thickness=thickness,
+        face_x=face_x,
+        top_z=top_z,
+        front_cap_r=front_cap_r
+    );
 }
 
 
@@ -166,32 +144,13 @@ module ds_shelf_root_fillet(
     top_z=DS_SHELF_TOP_Z,
     eps=DS_EPS
 ) {
-    if (radius > 0)
-        difference() {
-            translate([
-                face_x-radius,
-                -width/2,
-                top_z
-            ])
-                cube([
-                    radius,
-                    width,
-                    radius
-                ]);
-
-            translate([
-                face_x-radius,
-                0,
-                top_z+radius
-            ])
-                rotate([90,0,0])
-                    cylinder(
-                        r=radius,
-                        h=width + 2*eps,
-                        center=true,
-                        $fn=48
-                    );
-        }
+    u_holder_root_fillet(
+        width=width,
+        radius=radius,
+        face_x=face_x,
+        top_z=top_z,
+        eps=eps
+    );
 }
 
 
@@ -228,19 +187,14 @@ module ds_u_slot_cut(
     top_z=DS_SHELF_TOP_Z,
     eps=DS_EPS
 ) {
-    translate([axis_x,0,top_z-thickness-eps])
-        cylinder(d=slot_d, h=thickness+2*eps, $fn=48);
-
-    translate([
-        shelf_front_x-eps,
-        -slot_d/2,
-        top_z-thickness-eps
-    ])
-        cube([
-            axis_x - shelf_front_x + slot_d/2 + 2*eps,
-            slot_d,
-            thickness + 2*eps
-        ]);
+    u_holder_slot_cut(
+        slot_d=slot_d,
+        axis_x=axis_x,
+        shelf_front_x=shelf_front_x,
+        thickness=thickness,
+        top_z=top_z,
+        eps=eps
+    );
 }
 
 
@@ -256,46 +210,14 @@ module ds_u_slot_top_chamfer_cut(
     top_z=DS_SHELF_TOP_Z,
     eps=0.05
 ) {
-    if (chamfer > 0)
-        hull() {
-            // Nominal U profile at the bottom of the chamfer.
-            union() {
-                translate([axis_x,0,top_z-chamfer-eps])
-                    cylinder(d=slot_d, h=eps, $fn=64);
-
-                translate([
-                    shelf_front_x-eps,
-                    -slot_d/2,
-                    top_z-chamfer-eps
-                ])
-                    cube([
-                        axis_x - shelf_front_x + slot_d/2 + 2*eps,
-                        slot_d,
-                        eps
-                    ]);
-            }
-
-            // Expanded U profile at the top surface.
-            union() {
-                translate([axis_x,0,top_z+eps])
-                    cylinder(
-                        d=slot_d + 2*chamfer,
-                        h=eps,
-                        $fn=64
-                    );
-
-                translate([
-                    shelf_front_x-eps,
-                    -(slot_d/2 + chamfer),
-                    top_z+eps
-                ])
-                    cube([
-                        axis_x - shelf_front_x + slot_d/2 + chamfer + 2*eps,
-                        slot_d + 2*chamfer,
-                        eps
-                    ]);
-            }
-        }
+    u_holder_top_chamfer_cut(
+        slot_d=slot_d,
+        axis_x=axis_x,
+        shelf_front_x=shelf_front_x,
+        chamfer=chamfer,
+        top_z=top_z,
+        eps=eps
+    );
 }
 
 
