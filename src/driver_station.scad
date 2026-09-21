@@ -450,3 +450,61 @@ module driver_station_fit_coupon(
             cylinder(d=SMALL_FLAT_HOLE_D, h=thickness+2*DS_EPS, $fn=48);
     }
 }
+
+
+// U-slot comparison coupon for all five driver interfaces.
+// This is a calibration part only: production holders remain unchanged until
+// the physical U-slot test is evaluated.
+//
+// Slot order along Y:
+//   20.0  large Phillips
+//   21.5  large flat-blade
+//    6.9  small flat-blade
+//   30.0  full-size ratchet
+//   33.0  Stanley stubby
+//
+// Each circular seat opens to the +X edge with a straight channel equal to
+// the seat diameter. There is no chamfer/edge break so the test isolates the
+// effect of changing from a closed hole to an open U-shaped slot.
+module driver_station_u_slot_coupon(
+    thickness=6
+) {
+    plate_d = 62;
+    plate_w = 185;
+    center_x = 34;
+
+    slot_specs = [
+        [LARGE_PH_HOLE_D,     20],
+        [LARGE_FLAT_HOLE_D,   52],
+        [SMALL_FLAT_HOLE_D,   82],
+        [FULL_RATCHET_HOLE_D, 122],
+        [STUBBY_HOLE_D,       164]
+    ];
+
+    difference() {
+        cube([plate_d, plate_w, thickness]);
+
+        for (spec = slot_specs) {
+            d = spec[0];
+            y = spec[1];
+
+            translate([center_x, y, -DS_EPS])
+                cylinder(
+                    d=d,
+                    h=thickness + 2*DS_EPS,
+                    $fn=d >= 20 ? 64 : 48
+                );
+
+            translate([
+                center_x,
+                y - d/2,
+                -DS_EPS
+            ])
+                cube([
+                    plate_d - center_x + DS_EPS,
+                    d,
+                    thickness + 2*DS_EPS
+                ]);
+        }
+    }
+}
