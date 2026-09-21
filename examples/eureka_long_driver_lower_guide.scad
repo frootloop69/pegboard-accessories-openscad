@@ -1,7 +1,18 @@
 include <../src/presets.scad>
 use <../src/driver_station.scad>
+use <../src/mount.scad>
 
-rotate([90,0,0])
+// Production print orientation: horizontal accessory features remain
+// parallel to the slicer's XY plane. The common mount/accessory bottom is
+// translated exactly onto Z=0; do not rotate the model onto its side.
+translate([
+    0,
+    0,
+    -pegboard_mount_bottom_z(
+        board_pitch(PRESET_EUREKA_WORKSPACE),
+        peg_diameter(PRESET_EUREKA_WORKSPACE)
+    )
+])
 long_driver_lower_guide(
     pitch=board_pitch(PRESET_EUREKA_WORKSPACE),
     peg_d=peg_diameter(PRESET_EUREKA_WORKSPACE),
