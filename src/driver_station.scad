@@ -409,13 +409,17 @@ module bit_caddy_pocket(
     capture_h=26,
     wall=3,
     front_lip_h=10,
-    base_z=DS_SHELF_TOP_Z
+    base_z=DS_SHELF_TOP_Z,
+    back_overlap=DS_EPS
 ) {
     outer_w = inner_w + 2*wall;
-    outer_d = inner_d + 2*wall;
-    back_x = DS_FACE_X - wall;
-    inner_back_x = back_x;
+
+    // The pegboard mount plate itself is the rear wall of the pocket.
+    // Keep the tested internal depth measured forward from the plate face,
+    // and overlap the floor/side walls slightly into the plate for a robust union.
+    inner_back_x = DS_FACE_X;
     front_x = inner_back_x - inner_d;
+    shell_d = inner_d + wall + back_overlap;
 
     // bottom
     translate([
@@ -423,15 +427,9 @@ module bit_caddy_pocket(
         center_y-outer_w/2,
         base_z-wall
     ])
-        cube([outer_d, outer_w, wall]);
+        cube([shell_d, outer_w, wall]);
 
-    // rear wall
-    translate([
-        back_x,
-        center_y-outer_w/2,
-        base_z-wall
-    ])
-        cube([wall, outer_w, capture_h+wall]);
+    // No separate rear wall: the common pegboard backplate closes the pocket.
 
     // side walls
     for (sy = [-1,1])
@@ -440,7 +438,7 @@ module bit_caddy_pocket(
             center_y + sy*(inner_w/2 + wall/2) - wall/2,
             base_z-wall
         ])
-            cube([outer_d, wall, capture_h+wall]);
+            cube([shell_d, wall, capture_h+wall]);
 
     // low front lip
     translate([
@@ -455,9 +453,9 @@ module bit_caddy_pocket(
 // Full-size ratchet + its bit caddy as one module.
 //
 // The ratchet support is now a localized U shelf rather than a full-width
-// rectangular shelf. The bit-caddy pocket is structurally independent and
-// already has its own floor/rear wall, so the large slab between/under the two
-// functions was unnecessary material.
+// rectangular shelf. The bit-caddy pocket has its own floor/side/front walls
+// and uses the common pegboard backplate as its rear wall, avoiding redundant
+// material between the pocket and mount plate.
 module full_ratchet_with_bits(
     pitch=25.4,
     peg_d=5.5,
