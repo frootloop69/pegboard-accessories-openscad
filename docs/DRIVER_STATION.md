@@ -206,3 +206,11 @@ preserving:
 
 The ratchet U and bit caddy are both attached independently to the common
 pegboard backplate.
+
+
+## Bit-caddy vertical alignment
+
+The full-size ratchet bit-caddy pocket is now lowered so the **underside of its
+bottom floor aligns with the underside of the ratchet U shelf**. With the
+current defaults this means the 3 mm caddy floor and 6 mm ratchet shelf share
+the same bottom Z plane, giving the combined module a cleaner lower edge.
