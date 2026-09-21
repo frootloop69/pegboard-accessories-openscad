@@ -53,3 +53,6 @@
   while the bit caddy keeps only its own pocket structure.
 - Restricted the ratchet root fillet to the localized U support, eliminating
   the remaining material strip across the intentionally open region.
+
+- Lowered the full-size ratchet bit-caddy pocket so its bottom surface aligns
+  with the bottom surface of the ratchet U shelf.
