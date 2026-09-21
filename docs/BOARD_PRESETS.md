@@ -6,13 +6,18 @@ Status: **validated**
 
 ```text
 pitch              = 25.4 mm
-peg_diameter       = 5.5 mm
+peg_diameter       = 5.2 mm
 hook_offset        = 4.5 mm
 hook_neck          = 0.5 mm
 board_geom         = 5.0 mm
 ```
 
-Physical test result: 5.5 mm fits perfectly.
+Current production calibration: **5.2 mm**, physically tested with Creality
+Hyper PLA in the repository-standard axis-aligned print orientation.
+
+Historical result: 5.5 mm fit perfectly with the earlier filament/process.
+Treat peg diameter as printer/material/process-sensitive rather than a purely
+board-specific nominal dimension.
 
 ## `SPAMPUR_PRINTER`
 
