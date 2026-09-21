@@ -86,3 +86,11 @@
   long-driver lower guide.
 - On the Eureka 25.4 mm / 5.5 mm preset, primary 6 mm shelves move down by
   4.15 mm so their underside is flush with the backplate bottom.
+
+- Removed the legacy 90-degree side-print rotation from all current production
+  Eureka accessory examples.
+- Production exports now preserve horizontal shelves/U supports/pocket floors
+  parallel to the slicer XY plane and translate the shared mount/accessory
+  bottom exactly to Z=0.
+- Established this as the repository-wide production print-axis rule to avoid
+  stepped fill and poor bed contact from side-oriented geometry.
