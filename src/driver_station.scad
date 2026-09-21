@@ -469,7 +469,8 @@ module full_ratchet_with_bits(
     shelf_thickness=6,
     ratchet_axis_out=25,
     ratchet_y=-31,
-    caddy_y=27,
+    caddy_y=undef,
+    caddy_inner_w=50.5,
     caddy_wall=3,
     front_cap_r=undef,
     root_fillet_r=DS_DEFAULT_ROOT_FILLET_R,
@@ -477,6 +478,14 @@ module full_ratchet_with_bits(
 ) {
     axis_x = DS_FACE_X - ratchet_axis_out;
     shelf_front_x = DS_FACE_X - shelf_depth;
+
+    // Auto-align the caddy's outer edge with the outer edge of the 5-column
+    // pegboard backplate while preserving the full tested pocket width.
+    mount_half_w = ((5 - 1) * pitch) / 2 + peg_d / 2;
+    caddy_outer_w = caddy_inner_w + 2 * caddy_wall;
+    caddy_center_y = is_undef(caddy_y)
+        ? mount_half_w - caddy_outer_w / 2
+        : caddy_y;
 
     union() {
         ds_mount(
@@ -517,7 +526,8 @@ module full_ratchet_with_bits(
         // Bit caddy keeps only its own required pocket geometry.
         // Its underside is aligned with the underside of the ratchet U shelf.
         bit_caddy_pocket(
-            center_y=caddy_y,
+            center_y=caddy_center_y,
+            inner_w=caddy_inner_w,
             wall=caddy_wall,
             base_z=DS_SHELF_TOP_Z - shelf_thickness + caddy_wall
         );
