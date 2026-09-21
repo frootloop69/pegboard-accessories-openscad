@@ -36,3 +36,7 @@
 - Refined the Stanley stubby production holder with semicircular U-arm
   endcaps and a parameterized 4 mm concave shelf-to-backplate root fillet.
   The validated 33.0 mm tool-support slot is unchanged.
+
+- Added a parameterized **1.0 mm top-edge contact chamfer** to the inside of
+  the Stanley stubby 33.0 mm U-slot. The validated straight-wall support
+  diameter remains unchanged below the chamfer.
