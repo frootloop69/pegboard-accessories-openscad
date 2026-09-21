@@ -75,3 +75,14 @@
 
 - Added 4 mm convex fillets to the two exposed front/top edges of the
   full-size ratchet bit-caddy side walls.
+
+- Established a repository-wide print-efficiency rule: where function permits,
+  align the underside of accessory features with the bottom of the common
+  pegboard backplate to eliminate unnecessary support gaps.
+- Added reusable mount helpers for backplate-bottom Z, flush feature-top Z, and
+  backplate side extent.
+- Applied the rule to all current production accessories: fixed-driver rack,
+  full-size ratchet/caddy holder, Stanley stubby holder, and optional
+  long-driver lower guide.
+- On the Eureka 25.4 mm / 5.5 mm preset, primary 6 mm shelves move down by
+  4.15 mm so their underside is flush with the backplate bottom.
