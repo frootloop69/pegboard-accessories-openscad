@@ -225,3 +225,14 @@ the ratchet U rather than narrowed, so the full **50.5 mm internal width** and
 
 The default `caddy_y` is now `undef`, which enables automatic alignment.
 Supplying an explicit `caddy_y` still overrides the calculated position.
+
+
+## Bit-caddy rear-wall merge
+
+The bit-caddy pocket no longer has a separate rear wall. The common pegboard
+mounting backplate now forms the rear wall of the pocket directly.
+
+The pocket keeps the same **17.5 mm internal depth** by shifting the front lip,
+floor, and side walls toward the backplate. Those parts overlap the backplate by
+a small epsilon for a robust OpenSCAD union, but there is no longer a doubled
+3 mm wall at the rear.
