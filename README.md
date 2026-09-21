@@ -16,7 +16,7 @@ Parametric OpenSCAD tooling for designing 3D-printable pegboard accessories for 
 
 | Preset | Pitch | Peg diameter | Status |
 |---|---:|---:|---|
-| `EUREKA_WORKSPACE` | 25.4 mm | **5.5 mm** | Physically validated; fits perfectly |
+| `EUREKA_WORKSPACE` | 25.4 mm | **5.2 mm** | Validated with Creality Hyper PLA, standard orientation |
 | `SPAMPUR_PRINTER` | 25.4 mm | TBD | 5.8 mm fits easily; 6.2 mm is still loose; 6.8/6.9/7.0 mm calibration pending |
 
 Common retained geometry:
@@ -45,9 +45,11 @@ Mount calibration is authoritative: dimensions are updated from actual printed f
 ## Current calibration state
 
 ### Eureka workspace pegboard
-- 5.8 mm: too large
-- **5.5 mm: fits perfectly**
-- Current default: **5.5 mm**
+- 5.8 mm: too large in the earlier calibration series
+- 5.5 mm: fit perfectly with the earlier filament/process
+- **5.2 mm: validated with Creality Hyper PLA in the standard production orientation**
+- Current production default: **5.2 mm**
+- Peg diameter is treated as material/process-sensitive
 
 ### Spampur printer-rack pegboard
 - 5.8 mm: fits easily / has room to increase
