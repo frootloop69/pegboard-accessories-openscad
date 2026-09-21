@@ -26,55 +26,63 @@ Full-size ratchet bit caddy:
 - body depth: 15.98 mm
 - bits protrude approximately 13 mm beyond the body depth
 
-## V2 interfaces
+## V3 interfaces
 
 ### Fixed-driver rack
 
-The first physical coupon confirmed that the original shaft-sized openings fit,
-but the three fixed drivers sat too high and were top-heavy. V2 changes the
-upper rack to closed circular drop-through holes so each tool settles farther
-into its handle/neck transition, using the same balance principle as the
-ratcheting drivers.
+Physical testing showed that the larger handle-support geometry balances the
+fixed drivers well, and that opening the supports into front-loading U slots
+makes insertion/removal easier without sacrificing retention.
 
-Current hole diameters:
+Current U-slot diameters:
 
-- large Phillips: **20.0 mm**
+- large Phillips: **22.0 mm** (increased from 20.0 mm after physical test)
 - large flat-blade: **21.5 mm**
 - small flat-blade: **6.9 mm**
 
-These three holes are deliberately straight-sided with **no top chamfer**.
-That preserves the small retaining shoulder on the 7.5 mm small-flat handle.
+The slots are straight-sided with **no top chamfer**. That is particularly
+important for the small flat-blade, whose 7.5 mm handle leaves only a small
+retaining shoulder over the 6.9 mm slot.
 
 The separate lower guide for the two long drivers remains available as a
-fallback, but it is no longer expected to be necessary if the V2 support-hole
-geometry balances the tools as intended.
+fallback, but is not expected to be needed if the production rack behaves like
+the successful coupon.
 
 ### Full-size ratchet
 
-- 30.0 mm circular drop-through hole
+- **30.0 mm U-slot**
 - 6 mm shelf
-- small 0.4 mm entry edge break
 - adjacent shallow pocket for the bit caddy
 
 ### Stanley stubby
 
-- 33.0 mm circular drop-through hole
+- **33.0 mm U-slot**
 - 6 mm shelf
-- small 0.4 mm entry edge break
 
-The simple drop-through geometry is deliberate: the handles are wider than
-their necks and therefore form their own retaining shoulder.
+Both ratchets remain supported by the handle/neck transition, but can now be
+loaded from the front instead of requiring a vertical drop-through motion.
 
-### Physical test result — 2026-09-20
+### Physical test results
 
-The first fit coupon was tested on the actual tools:
+**2026-09-20 — first fit coupon**
 
-- full-size ratchet, 30 mm hole: fits and balances well
-- Stanley stubby, 33 mm hole: fits and balances well
-- original fixed-driver shaft openings: dimensional fit was good, but all
-  three fixed drivers were too top-heavy
+- full-size ratchet, 30 mm closed hole: fits and balances well
+- Stanley stubby, 33 mm closed hole: fits and balances well
+- original shaft-sized fixed-driver openings: dimensional fit was good, but
+  all three fixed drivers were too top-heavy
 
-This test directly drove the V2 fixed-driver hole sizes above.
+**2026-09-21 — all-driver U-slot coupon**
+
+- U-shaped support works well for all five drivers
+- large flat-blade at 21.5 mm: accepted
+- small flat-blade at 6.9 mm: accepted
+- full-size ratchet at 30.0 mm: accepted
+- Stanley stubby at 33.0 mm: accepted
+- large Phillips at 20.0 mm: functional but should be enlarged by 2 mm
+- production large-Phillips slot therefore set to **22.0 mm**
+
+This result established the V3 production geometry: U-shaped supports for all
+five drivers.
 
 ## Source files
 
@@ -95,14 +103,16 @@ Optional local-clearance test:
 
 ## Suggested validation sequence
 
-1. Print the updated `calibration/driver_station_fit_coupon.scad` to verify
-   the new 20.0 / 21.5 / 6.9 mm fixed-driver support holes.
-2. Confirm that all three fixed drivers now settle lower and balance by their
-   handles/handle transitions.
-3. Print the fixed-driver rack.
-4. Add the lower guide only if either long driver still swings excessively.
-5. The 30 mm full-size-ratchet and 33 mm stubby interfaces are already
-   physically confirmed to fit and balance well.
+The support concept is now physically validated. The next useful test is the
+actual pegboard-mounted production parts:
+
+1. Print the V3 fixed-driver rack.
+2. Confirm that the 22.0 mm large-Phillips slot gives the intended extra
+   clearance.
+3. Print the full-size ratchet + bit-caddy module.
+4. Print the stubby module.
+5. Add the lower long-driver guide only if real pegboard use shows that either
+   long driver swings excessively.
 
 All parts should be printed at 100% scale. PETG is preferred for the final
 working parts; PLA is acceptable for fit checks.
@@ -114,15 +124,14 @@ A second calibration coupon is available at:
 
 - `calibration/driver_station_u_slot_coupon.scad`
 
-It tests all five current support diameters as open U-shaped slots while
-leaving the production holder geometry unchanged:
+It tests the same U-shaped support concept used by the production holders:
 
-- 20.0 mm — large Phillips
+- 22.0 mm — large Phillips
 - 21.5 mm — large flat-blade
 - 6.9 mm — small flat-blade
 - 30.0 mm — full-size ratchet
 - 33.0 mm — Stanley stubby
 
-The slots have straight sides and no entry chamfer. The intent is to compare
-one-handed side loading/removal against the closed drop-through holes without
-changing the support diameter.
+The slots have straight sides and no entry chamfer. The U-slot concept has now
+been physically validated; the coupon remains useful for future printer/material
+fit checks.
