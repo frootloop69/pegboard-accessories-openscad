@@ -56,3 +56,9 @@
 
 - Lowered the full-size ratchet bit-caddy pocket so its bottom surface aligns
   with the bottom surface of the ratchet U shelf.
+
+- Shifted the full-size ratchet bit-caddy pocket inward so its outer side wall
+  aligns with the outer edge of the backplate instead of protruding past it.
+  Internal pocket width is unchanged.
+- Made caddy side alignment automatic by default while retaining `caddy_y`
+  as an optional manual override.
