@@ -259,3 +259,26 @@ changing the pocket's internal width.
 
 The radius is exposed as `caddy_side_fillet_r` in
 `full_ratchet_with_bits()`.
+
+
+## Backplate-bottom alignment
+
+All current production driver-station accessories now follow the repository
+print-efficiency rule: the underside of each primary front feature is aligned
+with the lower edge of its pegboard mounting plate.
+
+For the Eureka 25.4 mm / 5.5 mm mount, the common lower plane is **Z = -28.15
+mm** in installed coordinates.
+
+Current application:
+
+- fixed-driver rack: 6 mm shelf bottom aligned to backplate bottom
+- full-size ratchet U: 6 mm shelf bottom aligned to backplate bottom
+- bit-caddy floor: aligned to the same bottom plane
+- Stanley stubby U: 6 mm shelf bottom aligned to backplate bottom
+- optional long-driver lower guide: 4 mm shelf bottom aligned to backplate
+  bottom
+
+The vertical position is calculated from `pegboard_feature_top_z()`, so it
+tracks pitch and peg diameter rather than relying on a Eureka-specific
+hard-coded offset.
