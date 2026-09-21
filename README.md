@@ -15,7 +15,7 @@ Parametric OpenSCAD tooling for designing 3D-printable pegboard accessories for 
 | Preset | Pitch | Peg diameter | Status |
 |---|---:|---:|---|
 | `EUREKA_WORKSPACE` | 25.4 mm | **5.5 mm** | Physically validated; fits perfectly |
-| `SPAMPUR_PRINTER` | 25.4 mm | TBD | 5.8 mm fits easily; 6.1/6.2 mm calibration pending |
+| `SPAMPUR_PRINTER` | 25.4 mm | TBD | 5.8 mm fits easily; 6.2 mm is still loose; 6.8/6.9/7.0 mm calibration pending |
 
 Common retained geometry:
 
@@ -49,8 +49,10 @@ Mount calibration is authoritative: dimensions are updated from actual printed f
 
 ### Spampur printer-rack pegboard
 - 5.8 mm: fits easily / has room to increase
-- 6.1 mm: pending test
-- 6.2 mm: pending test
+- 6.2 mm: still loose
+- 6.8 mm: pending test
+- 6.9 mm: pending test
+- 7.0 mm: pending test
 - Current default: **not yet locked**
 
 ## OpenSCAD
