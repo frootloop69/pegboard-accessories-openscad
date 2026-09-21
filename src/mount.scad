@@ -11,6 +11,34 @@
   relicensing derived geometry.
 */
 
+// Shared dimensional helpers for accessories built on this mount.
+//
+// The mount plate's installed lower edge is set by the lower locator row:
+// local X max = pitch + peg_d/2, which becomes global Z min after the
+// rotate([0,90,0]) used by pegboard_mount_plate().
+function pegboard_mount_bottom_z(
+    pitch=25.4,
+    peg_d=5.5
+) = -(pitch + peg_d/2);
+
+// Outer Y extent of the mount plate. Useful for aligning accessory side walls
+// with the common backplate rather than allowing them to protrude.
+function pegboard_mount_outer_half_width(
+    columns=2,
+    pitch=25.4,
+    peg_d=5.5
+) = ((columns - 1) * pitch) / 2 + peg_d/2;
+
+// Default print-efficient accessory rule: if a feature can share the same
+// build-plane edge as the backplate, place its underside on mount_bottom_z.
+// This returns the required top Z for a feature of the supplied thickness.
+function pegboard_feature_top_z(
+    thickness,
+    pitch=25.4,
+    peg_d=5.5
+) = pegboard_mount_bottom_z(pitch, peg_d) + thickness;
+
+
 module pegboard_pin(
     clip=false,
     peg_d=5.5,
