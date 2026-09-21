@@ -11,8 +11,13 @@ CAL_BOARD_GEOM = is_undef(CAL_BOARD_GEOM) ? 5.0 : CAL_BOARD_GEOM;
 CAL_HOOK_OFFSET = is_undef(CAL_HOOK_OFFSET) ? 4.5 : CAL_HOOK_OFFSET;
 CAL_NECK = is_undef(CAL_NECK) ? 0.5 : CAL_NECK;
 
-// Print-ready orientation.
-rotate([90,0,0])
+// Print in the same axis-aligned orientation as production accessories so
+// filament/process effects on the peg geometry are representative.
+translate([
+    0,
+    0,
+    -pegboard_mount_bottom_z(CAL_PITCH, CAL_PEG_D)
+])
     pegboard_mount(
         columns=2,
         pitch=CAL_PITCH,
