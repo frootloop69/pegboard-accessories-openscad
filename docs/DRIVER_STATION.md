@@ -186,3 +186,23 @@ Driver-station defaults:
 The fixed-driver rack, full-size ratchet holder, Stanley stubby holder, and
 optional long-driver lower guide now all expose/use the shared fillet and
 contact-chamfer system.
+
+
+## Full-size ratchet material reduction
+
+The full-size ratchet/caddy module no longer uses a 107 mm-wide solid shelf.
+The ratchet now has a **45 mm-wide localized U support** centered on the
+validated 30 mm slot, while the bit caddy retains only its own pocket floor and
+walls.
+
+This removes the large unused slab between/beneath the two functions while
+preserving:
+
+- 30.0 mm ratchet U-slot
+- 1.0 mm top contact chamfer
+- rounded U-arm ends
+- 4.0 mm root fillet behind the ratchet support
+- the existing bit-caddy pocket geometry
+
+The ratchet U and bit caddy are both attached independently to the common
+pegboard backplate.
