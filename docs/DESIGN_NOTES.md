@@ -28,3 +28,32 @@ Peg diameter is board-specific.
 ## Calibration principle
 
 Change one mounting variable at a time where practical. Once a board preset is physically validated, treat the printed fit result as authoritative over nominal manufacturer dimensions.
+
+
+## Print-efficient bottom-alignment rule
+
+For production pegboard accessories, **align the lowest practical front
+feature with the bottom edge of the common pegboard backplate**.
+
+In the normal print orientation this gives the backplate and accessory feature
+a shared build-plane edge, avoiding an unnecessary air gap and the support
+material that gap would require.
+
+The shared mount library exposes:
+
+- `pegboard_mount_bottom_z(pitch, peg_d)` — installed Z coordinate of the
+  backplate lower edge.
+- `pegboard_feature_top_z(thickness, pitch, peg_d)` — top Z for a horizontal
+  feature whose underside should align with that lower edge.
+- `pegboard_mount_outer_half_width(columns, pitch, peg_d)` — common plate
+  side extent for accessory side-wall alignment.
+
+### Rule
+
+Use `pegboard_feature_top_z()` by default for shelves, U supports, pockets,
+trays, and similar cantilevered front features **unless a functional or
+mechanical requirement explicitly needs a different vertical position**.
+
+Do not trim or alter the physically validated pegboard hook/locator geometry
+merely to improve print orientation. Move accessory geometry to the mount
+reference plane instead.
