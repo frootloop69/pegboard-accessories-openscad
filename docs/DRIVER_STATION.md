@@ -214,3 +214,14 @@ The full-size ratchet bit-caddy pocket is now lowered so the **underside of its
 bottom floor aligns with the underside of the ratchet U shelf**. With the
 current defaults this means the 3 mm caddy floor and 6 mm ratchet shelf share
 the same bottom Z plane, giving the combined module a cleaner lower edge.
+
+
+## Bit-caddy side alignment
+
+The full-size ratchet bit-caddy pocket now auto-aligns its outer side wall with
+the outer edge of the 5-column pegboard backplate. The pocket is shifted toward
+the ratchet U rather than narrowed, so the full **50.5 mm internal width** and
+3 mm walls are preserved.
+
+The default `caddy_y` is now `undef`, which enables automatic alignment.
+Supplying an explicit `caddy_y` still overrides the calculated position.
