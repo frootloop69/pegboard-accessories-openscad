@@ -12,3 +12,9 @@
 - Added measured interfaces for three fixed screwdrivers, full-size ratchet,
   Stanley stubby ratchet, and the full-size ratchet bit caddy.
 - Added optional driver-station fit coupon and print-ready example files.
+
+- Physical V1 driver fit coupon tested on actual tools: both ratchet holes fit
+  and balance well; the original fixed-driver shaft openings fit but leave the
+  drivers too top-heavy.
+- Revised fixed-driver rack to closed 20.0 / 21.5 / 6.9 mm handle-support
+  holes; lower shaft guide retained only as an optional fallback.
