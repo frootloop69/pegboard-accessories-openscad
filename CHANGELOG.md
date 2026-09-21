@@ -105,3 +105,13 @@
   production default.
 - Preserved the earlier 5.5 mm result as a historical calibration for the
   previous filament/process.
+
+- Converted all four current Eureka production accessory examples into
+  OpenSCAD Customizer-ready front ends with grouped editable parameters.
+- Added detailed parameter-description blocks to each user-facing accessory
+  script.
+- Exposed tool-fit dimensions from the reusable driver-station modules so
+  U-slot and guide diameters can be changed from the example scripts without
+  editing `src/driver_station.scad`.
+- Exposed bit-caddy internal depth and capture height to the full-ratchet
+  Customizer script.
