@@ -102,3 +102,22 @@ horizontal accessory features remain parallel to XY and the common
 backplate/accessory bottom is translated to Z=0. Do not reintroduce the old
 90-degree side-print rotation unless a particular future accessory explicitly
 requires it.
+
+
+## OpenSCAD Customizer-ready accessory scripts
+
+The production accessory files in `examples/` expose their practical tuning
+parameters directly in the OpenSCAD Customizer. Open a production example and
+choose **Window -> Customizer**.
+
+Current Customizer-ready files:
+
+- `examples/eureka_fixed_driver_rack.scad`
+- `examples/eureka_full_ratchet_with_bits.scad`
+- `examples/eureka_long_driver_lower_guide.scad`
+- `examples/eureka_stubby_ratchet.scad`
+
+Each file includes a parameter guide at the top and grouped controls for mount
+calibration, tool fit, geometry, positioning, and edge treatment. The example
+files are intended to be the normal user-facing place to tune dimensions;
+`src/driver_station.scad` remains the reusable implementation.
