@@ -57,3 +57,22 @@ mechanical requirement explicitly needs a different vertical position**.
 Do not trim or alter the physically validated pegboard hook/locator geometry
 merely to improve print orientation. Move accessory geometry to the mount
 reference plane instead.
+
+
+## Production print-axis rule
+
+Production example files must preserve the installed accessory axes for
+printing:
+
+- horizontal shelves, U supports, pocket floors and tray floors remain
+  parallel to the slicer's **XY plane**;
+- the pegboard backplate remains vertical;
+- do **not** apply the legacy `rotate([90,0,0])` side-print transform;
+- translate the shared mount/accessory bottom plane to **Z = 0** instead.
+
+This keeps broad horizontal faces exactly parallel to the build plate and
+prevents slicers from creating stepped first layers, unnecessary solid fill,
+or partial-contact adhesion caused by a slightly side-oriented part.
+
+The production examples use `pegboard_mount_bottom_z()` to place that common
+bottom plane exactly on Z=0.
