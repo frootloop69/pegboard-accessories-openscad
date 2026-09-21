@@ -91,3 +91,12 @@ with the bottom edge of the common mounting backplate. Use
 `pegboard_feature_top_z()` from `src/mount.scad` rather than hard-coding a
 vertical offset. Functional requirements may override this, but unnecessary
 air gaps should not be designed into new holders.
+
+
+## Production print orientation
+
+Production example SCAD files now export in the intended print orientation:
+horizontal accessory features remain parallel to XY and the common
+backplate/accessory bottom is translated to Z=0. Do not reintroduce the old
+90-degree side-print rotation unless a particular future accessory explicitly
+requires it.
