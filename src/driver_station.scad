@@ -105,6 +105,89 @@ module ds_shelf(
 }
 
 
+// Single centered-U shelf with semicircular front ends on both arms.
+// The end-cap radius defaults to half the arm width, producing a true
+// semicircular nose without changing the tested U-slot diameter.
+module ds_rounded_single_u_shelf(
+    width,
+    depth,
+    slot_d,
+    thickness=6,
+    front_cap_r=undef,
+    face_x=DS_FACE_X,
+    top_z=DS_SHELF_TOP_Z
+) {
+    arm_w = (width - slot_d) / 2;
+    cap_r = is_undef(front_cap_r) ? arm_w / 2 : min(front_cap_r, arm_w / 2);
+    front_x = face_x - depth;
+
+    union() {
+        // Main shelf body begins at the cap centerline.
+        translate([
+            front_x + cap_r,
+            -width/2,
+            top_z-thickness
+        ])
+            cube([
+                depth - cap_r,
+                width,
+                thickness
+            ]);
+
+        // Semicircular noses for the two U arms.
+        for (sy = [-1, 1])
+            translate([
+                front_x + cap_r,
+                sy * (slot_d/2 + arm_w/2),
+                top_z-thickness
+            ])
+                cylinder(
+                    r=cap_r,
+                    h=thickness,
+                    $fn=48
+                );
+    }
+}
+
+
+// Concave quarter-round fillet between the shelf top and pegboard backplate.
+// Adds material in the inside corner while preserving a true radius.
+module ds_shelf_root_fillet(
+    width,
+    radius=4,
+    face_x=DS_FACE_X,
+    top_z=DS_SHELF_TOP_Z,
+    eps=DS_EPS
+) {
+    if (radius > 0)
+        difference() {
+            translate([
+                face_x-radius,
+                -width/2,
+                top_z
+            ])
+                cube([
+                    radius,
+                    width,
+                    radius
+                ]);
+
+            translate([
+                face_x-radius,
+                0,
+                top_z+radius
+            ])
+                rotate([90,0,0])
+                    cylinder(
+                        r=radius,
+                        h=width + 2*eps,
+                        center=true,
+                        $fn=48
+                    );
+        }
+}
+
+
 // Through-hole with a very small conical edge break at the top.
 // "d" remains the straight-wall diameter for almost the full thickness.
 module ds_drop_hole_cut(
@@ -382,7 +465,10 @@ module full_ratchet_with_bits(
 }
 
 
-// Stanley stubby ratchet drop-through holder.
+// Stanley stubby ratchet U-slot holder.
+// The U arms use semicircular front endcaps and a concave root fillet where
+// the shelf meets the pegboard plate. These changes are structural/aesthetic;
+// the physically validated 33 mm support slot is unchanged.
 module stubby_ratchet_holder(
     pitch=25.4,
     peg_d=5.5,
@@ -392,7 +478,9 @@ module stubby_ratchet_holder(
     shelf_width=60,
     shelf_depth=48,
     shelf_thickness=6,
-    tool_axis_out=26
+    tool_axis_out=26,
+    front_cap_r=undef,
+    root_fillet_r=4
 ) {
     axis_x = DS_FACE_X - tool_axis_out;
     shelf_front_x = DS_FACE_X - shelf_depth;
@@ -408,10 +496,12 @@ module stubby_ratchet_holder(
         );
 
         difference() {
-            ds_shelf(
+            ds_rounded_single_u_shelf(
                 width=shelf_width,
                 depth=shelf_depth,
-                thickness=shelf_thickness
+                slot_d=STUBBY_HOLE_D,
+                thickness=shelf_thickness,
+                front_cap_r=front_cap_r
             );
 
             ds_u_slot_cut(
@@ -421,6 +511,11 @@ module stubby_ratchet_holder(
                 thickness=shelf_thickness
             );
         }
+
+        ds_shelf_root_fillet(
+            width=shelf_width,
+            radius=root_fillet_r
+        );
     }
 }
 
